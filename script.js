@@ -1,104 +1,148 @@
+const game = {
+  party: [],
+  gyms: [
+    { location: "Pewter City", completed: false, difficulty: 1 },
+    { location: "Cerulean City", completed: false, difficulty: 2 },
+    { location: "Vermilion City", completed: false, difficulty: 3 },
+    { location: "Celadon City", completed: false, difficulty: 4 },
+    { location: "Fuchsia City", completed: false, difficulty: 5 },
+    { location: "Saffron City", completed: false, difficulty: 6 },
+    { location: "Cinnabar Island", completed: false, difficulty: 7 },
+    { location: "Viridian City", completed: false, difficulty: 8 },
+  ],
+  items: [
+    { name: "potion", quantity: 4 },
+    { name: "pokeball", quantity: 8 },
+    { name: "rare candy", quantity: 99 },
+  ],
+}
+
+
+
+// {title:"" , desc:"", input:"", func:null, proto:null}
+
 // EXERCISE 1
-const foods = [];
-print('ex1',{title:"Define an empty array", desc:"Create an empty array and assign it to a variable called <em>foods</em>.<br><em>Example only; Completed for me.</em>", input:"none", func:foods, proto:foods.constructor.name})
+//console.dir(pokemon, { maxArrayLength:null });
+print('ex1',{title:"Pokemon Object", desc:"1. Run console.dir(pokemon, { maxArrayLength:null })", input:"[*pokemon object*]", func:"[*large object*]", proto:`console.dir(game, { maxArrayLength })`})
 
 // EXERCISE 2
-foods.push("pizza", "cheeseburger");
-print('ex2',{title:"Add strings to the array" , desc:"1) Add 'pizza' and 'cheeseburger' to the <em>foods<em> array. ", input:"pizza, cheeseburger", func:foods, proto:`foods.push("pizza", "cheeseburger");`});
+console.log("\nGame Object: ",game);
+print('ex2',{title:"Game Object" , desc:"1. Run console.log(game)", input:null, func:"[*'game' object*]", proto:`console.log(game)`});
 
 // EXERCISE 3
-foods.unshift("taco");
-print('ex3',{title:"Insert at the beginning", desc:"1) Insert the string 'taco' at the beginning of the <em>foods</em> array.", input:"taco", func:foods, proto:`foods.unshift("taco")`});
+game["difficulty"] = 'hard';
+print('ex3',{title:"Add Difficulty" , 
+  desc:"1. Add a new property to the game object. Let's call it 'difficulty'.<br>2. Choose a value for 'difficulty' that you think fits the game. How would you assign", 
+  input:null, func:game.difficulty, proto:`game["difficulty"] = 'hard'`});
 
 // EXERCISE 4
-const favFood = foods[1];
-print('ex4',{title:"Access an array element" , desc:"1) Retrieve the 'pizza' string from the array based on its position (index) in the array.<br>2) Assign it to a variable called <em>favFood</em>.", input:null, func:favFood, proto:`JSON.stringify(favFood)`});
-
-// EXERCISE 4 v2
-const favFood2 = foods[foods.indexOf("pizza")];
-print('ex4v2',{title:"Dynamically Access an array element" , desc:"This method allows for dynamic discovery of the first instance of an element in the array matching 'pizza'. ", input:"pizza", func:favFood2, proto:`const favFood = foods[foods.indexOf("pizza")]`});
+game.party.push(pokemon.filter(p=>p.name==='Pikachu')[0]);
+print('ex4',{title:"Select A Starter" , 
+  desc:"1. Select a starter Pokémon from the 'pokemon' array. Remember, a starter Pokémon's 'starter' property is true.<br>2. Add this Pokémon to the 'game.party' array. Which array method will you use to add them?", 
+  input:"[pokemon Array]", func:JSON.stringify(game.party,null,1), proto:`game.party.push(pokemon.filter(p=>p.name==='Pikachu')[0])`});
 
 // EXERCISE 5
-foods.splice(2,0,"tofu");
-print('ex5',{title:"Insert an element between two others" , desc:"1) Insert the string 'tofu' between 'pizza' and 'cheeseburger' in the array.", input:"tofu", func:foods, proto:`foods.splice(2,0,"tofu")`});
-
-// EXERCISE 5 v2
-foods.splice(foods[foods.indexOf('pizza')+1],0,"tofu");
-print('ex5v2',{title:"Dynamically Insert an element between two others" , desc:"1) Insert the string 'tofu' between 'pizza' and 'cheeseburger' in the array.", input:"tofu", func:foods, proto:`foods.splice(foods[foods.indexOf('pizza')+1],0,"tofu")`});
+game.party.push(pokemon.filter(p=>p.starter===false && p.hp > 50 && p.type==='fire')[0]);
+game.party.push(pokemon.filter(p=>p.starter===false && p.hp > 69 && p.type==='psychic')[0]);
+game.party.push(pokemon.filter(p=>p.starter===false && p.hp > 80 && p.type==='normal')[0]);
+print('ex5',{title:"Choose team" , 
+    desc:"1. Choose three more Pokémon from the pokemon array and add them to your party.<br>2. Consider different attributes like 'type' or 'HP' for your selection. Which array method will you use to add them?", 
+    input:"", 
+    func:JSON.stringify(game.party,null,1), 
+    proto:`game.party.push(pokemon.filter(p=>{p.starter===false && p.hp > 40 && p.type==='fire'}));<br>game.party.push(pokemon.filter(p=>{p.starter===false && p.hp > 50 && p.type==='psychic'}));<br>game.party.push(pokemon.filter(p=>{p.starter===false && p.hp > 80 && p.type==='normal'}))`});
 
 // EXERCISE 6
-foods.splice(1,1,"sushi","cupcake");
-print('ex6',{title:"Replace elements", desc:"Replace 'pizza' in the <em>foods</em> array with 'sushi' and 'cupcake'.", input:"sushi, cupcake", func:foods, proto:`foods.splice(1,1,"sushi","cupcake")`});
+game.gyms.forEach(gym=>{if (gym.difficulty < 3) gym.completed = true});
+print('ex6',{title:"Set Easy Gyms Completed" , 
+  desc:"1. Set the completed property to true for gyms with a difficulty below 3.<br>2. Think about how you'd loop through the gyms array to check and update the completed property.", 
+  input:null, func:JSON.stringify(game.gyms,null,1), proto:`game.gyms.forEach(gym=>{if (gym.difficulty < 3) gym.completed = true})`});
 
 // EXERCISE 7
-const yummy = foods.slice(1,2);
-print('ex7',{title:"Using the <em>slice()</em> method", desc:"Use the <em>slice()</em> method to create a new array that contains 'sushi' and 'cupcake'.", input:null, func:yummy, proto:`const yummy = foods.slice(1,2)`});
+function evolveStarter() {game.party.splice(0,1,pokemon.filter(p=>p.name==='Raichu')[0]); return game.party};
+print('ex7',{title:"Evolve Starter" , desc:"1. Evolve the starter Pokémon you added to your party earlier. Each starter Pokémon evolves into a specific one.", 
+  input:null, func:JSON.stringify(evolveStarter(),null,1), proto:evolveStarter});
 
 // EXERCISE 8
-const soyIdx = foods.indexOf('tofu');
-print('ex8',{title:"Finding an index", desc:"1) Using the <em>indexOf()</em> method, find the index of the string 'tofu' in the <em>foods</em> array.<br>2) Assign it to a variable named <em>soyIdx</em>.", input:"tofu", func:soyIdx, proto:`const soyIdx = foods.indexOf('tofu')`});
+const printPartyList = () => `My Party: ${game.party.map(p=>p.name)}`;
+print('ex8',{title:"Print Party List" , desc:"1. Print the name of each Pokémon in your party.", input:null, func:JSON.stringify(printPartyList(),null,1), proto:printPartyList});
 
 // EXERCISE 9
-const allFoods = foods.join(' -> ');
-print('ex9',{title:"Joining elements", desc:"1) Use the <em>join()<em> method to concatenate the strings in the <em>foods</em> array, separated by ' -> '.<br>2) Assign the result to a variable called <em>allFoods</em>. ", input:"->", func:allFoods, proto:`const allFoods = foods.join(' -> ')`});
+const allStarters = () => pokemon.filter(p=>p.starter===true);
+print('ex9',{title:"Print All Starters" , desc:"1. Can you print out all the starter Pokémon from the pokemon array?", input:null, func:JSON.stringify(allStarters(),null,1), proto:allStarters});
 
 // EXERCISE 10
-const hasSoup = foods.includes("soup");
-print('ex10',{title:"Check for an element", desc:"1) Using the .includes() method, check if the <em>foods</em> array contains the string'soup'.<br>2) Assign the result to a variable called <em>hasSoup</em>.", input:"soup", func:hasSoup, proto:`const hasSoup = foods.includes("soup")`});
+game['catchPokemon'] = function(pokemonObj){this.party.push(pokemonObj)};
+print('ex10',{title:"Add a method to the Object" , 
+  desc:"1. Create a method called 'catchPokemon' and add it to the 'game' object. You should not need to edit the original game object directly. This method should:<br>- Accept an object as a parameter called 'pokemonObj'<br>- Add the 'pokemonObj' to the 'game.party' array.<br>- not return anything", 
+  input:"[param: pokemonObj]", func:game.catchPokemon, proto:`game['catchPokemon'] = function(pokemonObj){this.party.push(pokemonObj)}`});
 
 // EXERCISE 11
-const nums = [100, 5, 23, 15, 21, 72, 9, 45, 66, 7, 81, 90];
-const odds = [];
-for (let num of nums) {num % 2!==0 && odds.push(num)};
-print('ex11',{title:"Odd numbers from an array", desc:"1) Choose a method to iterate through the <em>nums</em> array.<br>2) Push each odd number to a new array named <em>odds</em>`.", input:nums, func:odds, proto:`for (let num of nums) {num % 2!==0 && odds.push(num)}`});
+game['catchPokemon'] = function(pokemonObj){
+  this.party.push(pokemonObj);
+  game.items.filter(i=>i.name==='pokeball')[0].quantity--;
+}
+print('ex11',{title:"Modify the method to use pokeballs" , 
+  desc:"1. Copy the 'catchPokemon' method that you just wrote above, and paste it below. Modify it so that it also decreases the number of pokeballs in your inventory each time you catch a Pokémon.", 
+  input:"[param: pokemonObj]", func:game.catchPokemon, proto:`game['catchPokemon'] = function(pokemonObj){<br>&nbsp;&nbsp;this.party.push(pokemonObj);<br>&nbsp;&nbsp;game.items.filter(i=>i.name==='pokeball')[0].quantity--;<br>}`});
 
-// EXERCISE 11 v2
-const odds2 = nums.filter(num=>num % 2!==0);
-print('ex11v2',{title:"Odd numbers from an array", desc:"This method uses the built in Array.filter() method to make a shallow copy, iterate, and perform logic.", input:nums, func:odds2, proto:`const odds2 = nums.filter(num=>num % 2!==0)`});
+// TEST EXERCISE 11
+{
+const partyBefore = [...game.party];
+const quantityBefore = Number(game.items.filter(i=>i.name==='pokeball')[0].quantity);
+game.catchPokemon(pokemon.filter(p=>p.number===69)[0]);
+print('ex11-T',{title:"Test catchPokemon()", 
+  desc:"1. After updating the method, call it and pass in a Pokemon object of your choice from the 'pokemon' data to catch it.<br>2. Also, log the 'game.items' array to confirm that the pokeball quantity is being decremented.", 
+  input:pokemon.filter(p=>p.number===69)[0], 
+  func:`Party Before: ${JSON.stringify(partyBefore,null,1)}<br>Party After: ${JSON.stringify(game.party,null,1)}<br>Quantity Before: ${quantityBefore}<br>Quantity After: ${game.items.filter(i=>i.name==='pokeball')[0].quantity}`, 
+  proto:`game.catchPokemon(pokemon.filter(p=>p.number===69)[0])`});
+}
 
 // EXERCISE 12
-const fizz = []; // numbers evenly divisable by 3
-const buzz = []; // numbers evenly divisable by 5
-const fizzBuzz = []; // numbers evenly divisable by 3 & 5
-for (let num of nums) {
-    if (num % 3 === 0) fizz.push(num);
-    if (num % 5 === 0) buzz.push(num);
-    if (num % 3 === 0 && num % 5 === 0) fizzBuzz.push(num);
+game['setGymCompletion'] = function(type,value,bool) { // Had I known I'd use this again, I would've done this the first time.
+  switch (type) {
+    case 'difficulty': {this.gyms.forEach(gym=>{if (gym.difficulty < value) gym.completed = bool})}; break;
+    case 'location': {this.gyms.forEach(gym=>{if (gym.location === value) gym.completed = bool})}; break;
+  }
 };
-print('ex12',{title:"FizzBuzz with arrays", 
-    desc:"1) Choose a method to iterate through the <em>nums</em> array. <br>2. As you loop, sort the numbers into new arrays based on the following rules:<br>&nbsp;&nbsp;- Push any number evenly divisible by 3 to an array called <em>fizz</em>.<br>&nbsp;&nbsp;- Push any number evenly divisible by 5 to an array called <em>buzz</em>.<br>&nbsp;&nbsp;- Push any number that is evenly divisible by 3 and 5 to an array called <em>fizzbuzz</em>.<br>Note: A single number may meet more than one of the above rules. If it does, it should be placed in multiple arrays. For example, the number 15 will appear in the <em>fiz</em>, <em>buzz</em>, and <em>fizzbuzz</em> arrays.", 
-    input:nums, func:JSON.stringify({fizz,buzz,fizzBuzz}), proto:`for (let num of nums) {<br>&nbsp;&nbsp;if (num % 3 === 0) fizz.push(num);<br>&nbsp;&nbsp;if (num % 5 === 0) buzz.push(num);<br>&nbsp;&nbsp;if (num % 3 === 0 && num % 5 === 0) fizzBuzz.push(num);<br>}`});
+game.setGymCompletion('difficulty',6,true);
+print('ex12',{title:"Set Medium Gyms Completed" , desc:"1. Similar to Exercise 6, now complete gyms with a difficulty below 6.", input:"6,true", 
+  func:game.gyms.map(g=>JSON.stringify(g,null,1)), 
+  proto:`game['setGymCompletion'] = function(type,value,bool) {<br>&nbsp;&nbsp;switch (type) {<br>&nbsp;&nbsp;&nbsp;&nbsp;case 'difficulty': {this.gyms.forEach(gym=>{if (gym.difficulty < value) gym.completed = bool})}; break;<br>&nbsp;&nbsp;&nbsp;&nbsp;case 'location': {this.gyms.forEach(gym=>{if (gym.location === value) gym.completed = bool})}; break;<br>&nbsp;&nbsp;}<br>};<br>game.setGymCompletion('difficulty',6,true);`
+});
 
 // EXERCISE 13
-const numArrays = [
-	[100, 5, 23],
-	[15, 21, 72, 9],
-	[45, 66],
-	[7, 81, 90]
-];
-const numList = numArrays[numArrays.length -1];
-print('ex13',{title:"Retrieve the last array", desc:"1) Assign the last nested array in the <em>numArrays</em> below to a variable named <em>numList</em>. As you do this, also fulfill these goals:<br>&nbsp;&nbsp;- Assume you don't know how many nested arrays <em>numArrays</em> contains.<br>&nbsp;&nbsp;- Do not alter the original <em>numArrays</em> array.", input:numArrays, func:numList, proto:`const numList = numArrays[numArrays.length -1]`});
+game['gymStatus'] = function() {
+  if (!this.gymTally) {this['gymTally'] = {complete:0,incomplete:0}};
+  this.gymTally.complete = game.gyms.filter(g=>g.completed===true).length;
+  this.gymTally.incomplete = game.gyms.filter(g=>g.completed===false).length;
+}
+print('ex13',{title:"Gym Tally" , desc:"1. Create a 'gymStatus' method in 'game' to tally completed and incomplete gyms.<br>This method should:<br>- Not accept any arguments.<br>- Initially create a constant 'gymTally', which is an object that has two properties: 'completed' and 'incomplete', both of which are initially set to 0.<br>- Iterate through the objects in the 'game.gyms' array and update the properties on 'gymTally' as follows:<br>&nbsp;&nbsp;- 'completed' should count how many gyms in the array have a value of 'true' for their 'completed' property.<br>&nbsp;&nbsp;- 'incomplete' should count how many gyms in the array have a value of 'false' for their 'completed' property.<br>- Log the value of 'gymTally'.<br>- The method should not return anything.", 
+  input:null, func:"[*object*]", proto:`game['gymStatus'] = function() {<br>&nbsp;&nbsp;if (!this.gymTally) {this['gymTally'] = {complete:0,incomplete:0}};<br>&nbsp;&nbsp;this.gymTally.complete = game.gyms.filter(g=>g.completed===true).length;<br>&nbsp;&nbsp;this.gymTally.incomplete = game.gyms.filter(g=>g.completed===false).length;
+}`});
+
+// EXERCISE 13 TEST
+{
+  const before = JSON.stringify({...game.gymTally},null,1);
+  game.gymStatus();
+  print('ex13-T',{title:"Test Gym Tally", desc:null, input:null, func:`Before: ${before}<br>After: ${JSON.stringify(game.gymTally,null,1)}`, 
+  proto:`const before = {...game.gymTally};<br>game.gymStatus();`})
+}
 
 // EXERCISE 14
-const num = numArrays.map(arr=>arr.filter(el=>el===66)).join('');
-print('ex14',{title:"Accessing within nested arrays", desc:"1) Retrieve the number 66 from the <em>numArrays</em> array. As part of this process do not alter the original <em>numArrays</em> array.<br>2) Assign it to a variable called <em>num</em>.", input:numArrays, func:num, proto:`const num = numArrays.map(arr=>arr.filter(el=>el===66)).join()`});
+game['countParty'] = function() {return(this.party.length)}
+print('ex14',{title:"Count Party" , 
+  desc:"1. Add a 'partyCount' method to 'game' that counts the number of Pokémon in your party.<br>This method should:<br>&nbsp;&nbsp;- Not accept any arguments.<br>&nbsp;&nbsp;- Count the number of Pokemon in the party.<br>&nbsp;&nbsp;- return the found number of Pokemon in the party.", 
+  input:"", func:game.countParty, proto:`game['countParty'] = function() {return(this.party.length)}`});
 
-// EXERCISE 14 v2
-const num2 = numArrays.flat(1)[numArrays.flat(1).indexOf(66)];
-print('ex14v2',{title:"Accessing within nested arrays", desc:"1) Retrieve the number 66 from the <em>numArrays</em> array. As part of this process do not alter the original <em>numArrays</em> array.<br>2) Assign it to a variable called <em>num</em>.", input:numArrays, func:num2, proto:`const num2 = numArrays.flat(1)[numArrays.flat(1).indexOf(66)]`});
+// EXERCISE 15
+game.setGymCompletion('difficulty',8,true);
+game.gymStatus();
+print('ex15',{title:"Complete Hard Gyms" , desc:"1. Complete gyms with a difficulty below 8.", 
+  input:"8,true", func:game.gymTally, proto:`game.setGymCompletion('difficulty',8,true);<br>game.gymStatus();`});
 
-// EXERCISE 15-A
-const sumA = numArrays.map(arr=>arr.reduce((a,c)=>a+c,0));
-print('ex15-A',{title:"Nested array sum", desc:"<em>I'm not sure if it wants a single sum, or sums of each, so I did both.</em><br>1) Use nested loops or <em>forEach()M/em> methods to sum up all numbers within <em>numArrays</em> nested arrays.<br>2) Assign the sum to a variable called <em>total</em>.<br><em>Hint: Be sure to declare and initialize the total variable before the iterations.</em>", input:numArrays, func:sumA, proto:`const sumA = numArrays.map(arr=>arr.reduce((a,c)=>a+c,0))`});
-
-// EXERCISE 15-B
-const sumB = numArrays.map(arr=>arr.reduce((a,c)=>a+c,0)).reduce((a,c)=>a+c,0);
-print('ex15-B',{title:"Nested array sum", desc:"<em>I'm not sure if it wants a single sum, or sums of each, so I did both.</em><br>1) Use nested loops or <em>forEach()M/em> methods to sum up all numbers within <em>numArrays</em> nested arrays.<br>2) Assign the sum to a variable called <em>total</em>.<br><em>Hint: Be sure to declare and initialize the total variable before the iterations.</em>", input:numArrays, func:sumB, proto:`const sumB = numArrays.map(arr=>arr.reduce((a,c)=>a+c,0)).reduce((a,c)=>a+c,0)`});
-
-// EXERCISE 15-C
-const sumC = numArrays.flat(1).reduce((a,c)=>a+c,0);
-print('ex15-C',{title:"Nested array sum", desc:"<em>I'm not sure if it wants a single sum, or sums of each, so I did both.</em><br>1) Use nested loops or <em>forEach()M/em> methods to sum up all numbers within <em>numArrays</em> nested arrays.<br>2) Assign the sum to a variable called <em>total</em>.<br><em>Hint: Be sure to declare and initialize the total variable before the iterations.</em>", input:numArrays, func:sumC, proto:`const sumC = numArrays.flat(1).reduce((a,c)=>a+c,0)`});
-
+// EXERCISE 16
+console.dir(game, { depth:null })
+print('ex16',{title:"Final Game Object" , desc:"1. Log the entire 'game' object to the console.", input:null, func:JSON.stringify(game,null,1), proto:null});
 
 // RENDERING FUNCTIONS
 
@@ -124,27 +168,29 @@ function drawCard(ex,obj) {
         const description = document.createElement('p');
             description.innerHTML = obj.desc;
             card.append(description);
-        const content = document.createElement('section');
-        const contentHead = document.createElement('h4');
-            contentHead. innerHTML = "Result:";
-            content.append(contentHead);
+        const result = document.createElement('section');
+            result.id = 'result-section';
+        const resultHead = document.createElement('h4');
+            resultHead. innerHTML = "Result:";
+            result.append(resultHead);
         const inputInfo = document.createElement('p');
             inputInfo.innerHTML = `<span>Input:</span> ${obj.input}`;
             inputInfo.classList.add('result');
-            content.append(inputInfo);
-        const result = document.createElement('p');
-            result.innerHTML = `<span>Output:</span> ${obj.func}`;
-            result.classList.add('result');
-            result.append(obj.func);
-            content.append(result);
+            result.append(inputInfo);
+        const output = document.createElement('p');
+            output.innerHTML = `<span>Output:</span> ${obj.func}`;
+            output.classList.add('output');
+            result.append(output);
+        const myCode = document.createElement('section');
         const protoHead = document.createElement('h4');
             protoHead.innerHTML = "My Code:";
-            content.append(protoHead);
+            myCode.append(protoHead);
         const prototype = document.createElement('p');
             prototype.innerHTML = obj.proto;
-            content.append(prototype);
+            myCode.append(prototype);
     
-        card.append(content);
+        card.append(result);
+        card.append(myCode);
         document.querySelector('body').append(card);
     }
     catch {

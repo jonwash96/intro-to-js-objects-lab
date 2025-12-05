@@ -3,12 +3,12 @@ body {
     height: 100vh;
     overflow: none;
     margin: auto;
-    background-color: white;
+    background-color: #37b;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    gap:20px
+    gap:20px;
 }
 
 .card {
@@ -16,26 +16,30 @@ body {
     height: max-content;
     padding: 20px;
     box-shadow: 0px 0px 15px #0002;
-    border-radius: 8px;
+    border-radius: 22px;
     text-align: center;
-    background-color: white;
+    background-color: #fc0;
+    border:8px solid black;
     display: block;
 }
 
-h4 {color:grey;margin:2em 0 1em 0;}
+h4 {color:#37b;margin:2em 0 1em 0;}
 h2 {font-size:1em;margin:0;}
-h3 {font-size:1.6em;margin:.25em 0 1em 0;color:#4a8;}
+h3 {font-size:1.6em;margin:.25em 0 1em 0;color:#c56;}
 .card p {font-family:monospace;}
 .result span {font-weight: bold;}
+#result-section {border-block:1px solid black; h4 {margin-top:1em;}}
 
 @media (prefers-color-scheme: dark) {
-    body {background-color: #222;color: white;}
+    body {background-color: #026;color: white;}
     
-    h4 {color:#acb;}
-
+    h3 {color:#026;}
+    h4 {color:#16d;}
+    
     .card {
-        background-color: #3a3f4a;
-        color: white;
+        background-color: #fc0;
+        color: black;
+        border:8px solid #000;
         box-shadow: 0px 0px 15px #0003;
     }
 }
